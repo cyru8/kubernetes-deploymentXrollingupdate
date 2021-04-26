@@ -13,7 +13,6 @@ spec:
     matchLabels:
       app: apache-deployment
       role: webserver
-  # strategy: {}
   strategy:
     type: RollingUpdate
     rollingUpdate:
