@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: dev
+  creationTimestamp: null
+  labels:
+    app: apache-deployment
+    role: webserver
+  name: apache-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: apache-deployment
+      role: webserver
+  # strategy: {}
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 30%
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: apache-deployment
+        role: webserver
+    spec:
+      containers:
+      - image: httpd:latest
+        name: frontend
+        ports:
+        - containerPort: 80
+        resources: {}
+status: {}
